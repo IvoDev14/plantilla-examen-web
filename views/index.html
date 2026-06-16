@@ -1,0 +1,37 @@
+<!-- Plantilla de vista HTML genérica -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Examen Web</title>
+    <script defer src="/app.js"></script>
+</head>
+
+<body>
+    <h1>Título Principal</h1>
+    <!-- Mustache decide si se muestra u oculta al cargar la página -->
+    <div id="form-container" style="display: {{#hideForm}}none{{/hideForm}}{{^hideForm}}block{{/hideForm}}">
+        <form id="mainForm">
+            <label>Name:</label>
+            <input type="text" id="itemName" name="name" required>
+
+            <!-- Mensaje de validación dinámica -->
+            <div id="validationMsg"></div>
+
+            <button type="submit">Create</button>
+        </form>
+    </div>
+    <h2>List of Items</h2>
+    <ul id="itemsList">
+        <!-- Bucle inicial usando _id de MongoDB -->
+        {{#items}}
+        <li id="item-{{_id}}">
+            {{name}}
+            <button onclick="deleteRequest('{{_id}}')">Eliminar</button>
+        </li>
+        {{/items}}
+    </ul>
+</body>
+
+</html>
